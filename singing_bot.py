@@ -47,6 +47,14 @@ tigerking_text = {
     "C A R O L E   B A S K I N    !!!": "2"
 }
 
+birds_text = {
+    "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~": "3",
+    "All of the birds died in 1986": "3",
+    "due to Reagan killing them": "2",
+    "and replacing them with spies": "1.4",
+    "that are now watching us.": "2",
+    "The birds work for the Bourgeoisie": "3"
+}
 
 ffmpeg_options = {
     'options': '-vn'
@@ -61,11 +69,13 @@ class Music(commands.Cog):
     async def sing(self, ctx, arg: str):
         switcher_sound = {
             "growup"    :   'songs/wicked_witch_of_the_east.mp3',
-            "carolebaskin" :   'songs/tiger_king.mp3'
+            "carolebaskin" :   'songs/tiger_king.mp3',
+            "birds" : 'songs/the_birds.mp3'
         }
         switcher_text = {
             "growup": growup_text,
-            "carolebaskin": tigerking_text
+            "carolebaskin": tigerking_text,
+            "birds": birds_text
         }
 
         sound = switcher_sound.get(arg)
@@ -74,7 +84,7 @@ class Music(commands.Cog):
             ctx.voice_client.play(discord.FFmpegPCMAudio(sound), after=lambda e: print('done', e))
         for word in text:
             await ctx.send(word)
-            time.sleep(float(text[word]))
+            await asyncio.sleep(float(text[word]))
 
         
         
@@ -96,10 +106,10 @@ class Music(commands.Cog):
         
         for pic in picture_file_list:
             await ctx.send(file=discord.File(pic))
-            time.sleep(float(picture_file_list[pic]))
+            await asyncio.sleep(float(picture_file_list[pic]))
         
 
-        time.sleep(12)
+        await asyncio.sleep(12)
         await ctx.voice_client.disconnect()
 
     @commands.command()
