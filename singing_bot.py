@@ -119,7 +119,7 @@ class Music(commands.Cog):
      
         for cmnd in keys:
             await ctx.send(f'!sing {cmnd}')
-        await ctx.send(f'!ghana')
+        await ctx.send('!ghana')
    
 
     # Any new functins that require voice 
